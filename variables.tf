@@ -17,3 +17,8 @@ variable "key" {
     description = "This variable states the key pair used for all new EC2 instances"
     default = "mmcga"
 }
+
+variable "credentials" {
+    description = "This variable states the location of the active credentials file"
+    default = "~/.aws/credentials"
+}
