@@ -12,3 +12,11 @@ variable "key" {
   description = "This variable states the key pair used for all new EC2 instances"
   default     = "mmcga"
 }
+
+variable "subnet_id" {
+  description = "Subnet ID for EC2"
+}
+
+variable "sg_id" {
+  description = "security group ID for EC2"
+}

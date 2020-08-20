@@ -1,5 +1,5 @@
 variable "vpc_id" {
-  default = "aws_vpc.terraform_vpc.id"
+  description = "vpc_id for SG"
 }
 
 variable "ingress_ports" {

@@ -12,7 +12,7 @@ data "aws_availability_zones" "available" {
 }
 
 resource "aws_subnet" "terraform_subnet_a" {
-  vpc_id            = var.vpc_id
+  vpc_id            = aws_vpc.terraform_vpc.id
   cidr_block        = var.subnet_cidr_block
   availability_zone = data.aws_availability_zones.available.names[0]
 
@@ -22,7 +22,7 @@ resource "aws_subnet" "terraform_subnet_a" {
 }
 
 resource "aws_internet_gateway" "TFGW" {
-  vpc_id = var.vpc_id
+  vpc_id = aws_vpc.terraform_vpc.id
 
   tags = {
     Name = "TFGW"
@@ -30,11 +30,11 @@ resource "aws_internet_gateway" "TFGW" {
 }
 
 resource "aws_route_table" "TFRT" {
-  vpc_id = var.vpc_id
+  vpc_id = aws_vpc.terraform_vpc.id
 
   route {
     cidr_block = var.Internet
-    gateway_id = var.TFGW
+    gateway_id = aws_internet_gateway.TFGW.id
   }
 
   tags = {
@@ -43,6 +43,6 @@ resource "aws_route_table" "TFRT" {
 }
 
 resource "aws_route_table_association" "TFRT_association" {
-  subnet_id      = var.subnet_id
-  route_table_id = var.TFRT
+  subnet_id      = aws_subnet.terraform_subnet_a.id
+  route_table_id = aws_route_table.TFRT.id
 }

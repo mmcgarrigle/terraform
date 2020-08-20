@@ -10,7 +10,7 @@ resource "aws_security_group" "Allow_SSH" {
       from_port   = port.value
       protocol    = "tcp"
       to_port     = port.value
-      cidr_blocks = [var.internet]
+      cidr_blocks = [var.Internet]
     }
   }
 
@@ -18,7 +18,7 @@ resource "aws_security_group" "Allow_SSH" {
     from_port   = "0"
     protocol    = "-1"
     to_port     = "0"
-    cidr_blocks = [var.internet]
+    cidr_blocks = [var.Internet]
   }
 
   tags = {
