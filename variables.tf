@@ -31,3 +31,24 @@ variable "subnet_cidr_block" {
   default = "192.167.1.0/24"
 }
 
+variable "ingress_ports" {
+  type        = list
+  description = "list of ingress ports"
+  default     = [22]
+}
+
+variable "vpc_id" {
+  default = "aws_vpc.terraform_vpc.id"
+}
+
+variable "TFGW" {
+  default = "aws_internet_gateway.TFGW.id"
+}
+
+variable "Internet" {
+  default = "0.0.0.0/0"
+}
+
+variable "subnet_id" {
+  default = "aws_subnet.terraform_subnet_a.id"
+}
