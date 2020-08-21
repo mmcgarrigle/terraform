@@ -1,7 +1,7 @@
-resource "aws_security_group" "Allow_SSH" {
-  name        = "Allow_SSH"
-  description = "Allows ability to SSH into EC2 instance"
-  vpc_id      = var.vpc_id
+resource "aws_security_group" "sg_web" {
+  name        = var.sg_web_name
+  description = var.sg_web_description
+  vpc_id = var.vpc_id
 
   dynamic "ingress" {
     iterator = port
@@ -10,18 +10,15 @@ resource "aws_security_group" "Allow_SSH" {
       from_port   = port.value
       protocol    = "tcp"
       to_port     = port.value
-      cidr_blocks = [var.Internet]
+      cidr_blocks = [var.ip_addresses]
     }
   }
 
   egress {
-    from_port   = "0"
+    from_port   = var.outbound_port
     protocol    = "-1"
-    to_port     = "0"
-    cidr_blocks = [var.Internet]
+    to_port     = var.outbound_port
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name = "Allow_SSH"
-  }
 }
